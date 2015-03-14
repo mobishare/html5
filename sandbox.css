@@ -1,0 +1,26 @@
+#search{
+  width: 100%;
+  height: 600px;  
+  margin: 0 auto;
+  frameBorder: 0px; 
+  border: 0px; 
+  scrolling: no;
+}
+
+#article{
+  width: 100%;
+  height: 600px;  
+  margin: 0 auto;
+  frameBorder: 0px; 
+  border: 0px; 
+  scrolling: no;
+}
+
+#soundcloud{
+  width: 100%;
+  height: 500px;  
+  margin: 0 auto;
+  frameBorder: 0px; 
+  border: 0px; 
+  scrolling: no;
+}
