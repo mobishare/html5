@@ -1,0 +1,266 @@
+
+
+	<!--DEMO	
+http://mobishare.github.io/html5/hardwell.html   -->
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<html 
+	lang="en-US" 
+	class="not-ie no-js" 
+	prefix="og: http://ogp.me/ns#"
+	itemscope=""
+	itemtype="http://schema.org/WebPage" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	data-useragent="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C)"
+	data-platform="Win32">
+<!--<![endif]-->
+	<head>
+	
+	
+	<!--BASICS META TAGS-->	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="Description" content="Hardwell Via Soundcloud">
+	<meta name="Keywords" content="hardwell, music, soundcloud">
+	<meta name="robots" content="index,follow">
+
+	<META NAME="author" content="yoke">
+	<META NAME="copyright" content="yoke">
+	<META NAME="language" content="en-us">
+	<META NAME="rating" content="General">
+	<META NAME="revisit-after" content="1 Days">
+	<META http-equiv="pragma" content="no-cache">	
+	<meta content='mailbox@mobi.cloudns.pro' name='email'/>
+	<meta content='Global' name='Distribution'/>
+	
+	
+	<!--MOBILE META TAGS-->	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!--CSS-->				
+	<link href="common.css" rel="stylesheet" type="text/css">
+	<link href="sandbox.css" rel="stylesheet" type="text/css">
+	
+	<!--Google Fonts-->	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CSource+Code+Pro' rel='stylesheet' type='text/css'>
+	
+	
+	</head> 	
+	
+<body onload="initialize()" itemscope itemtype="http://schema.org/WebPage">
+	
+<script>
+window.requestAnimationFrame = window.requestAnimationFrame ||
+                               window.webkitRequestAnimationFrame;
+var supported = true;
+
+if (!!!document.getCSSCanvasContext) {
+  document.querySelector('#notsupport').style.display = 'block';
+  supported = false;
+}
+
+function correctPixelRatio(ctx, container) {
+	var canvas = ctx.canvas;
+	var ratio =  window.devicePixelRatio / ctx.webkitBackingStorePixelRatio;
+
+	var oldWidth = canvas.width;
+	var oldHeight = canvas.height;
+
+	canvas.width = oldWidth * ratio;
+	canvas.height = oldHeight * ratio;
+
+	canvas.style.width = oldWidth + 'px';
+	canvas.style.height = oldHeight + 'px';
+
+  //ctx.scale(ratio, ratio);
+
+	return ratio;
+}
+
+var computedStyle = window.getComputedStyle(document.querySelector('#container'));
+var WIDTH = parseInt(computedStyle.width);
+var HEIGHT = parseInt(computedStyle.height);
+
+if (supported) {
+  var ctx = document.getCSSCanvasContext('2d', 'animation', WIDTH, HEIGHT);
+  var canvas = ctx.canvas;
+} else {
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+}
+var ratio = correctPixelRatio(ctx);
+
+WIDTH = ctx.canvas.width;
+HEIGHT = ctx.canvas.height;
+
+//var rotation = 1;
+function draw(time) {
+	ctx.clearRect(0, 0, WIDTH, HEIGHT);
+	
+	var center = [WIDTH / 2, HEIGHT / 2];
+	var PADDING = 0; // px
+	var R = Math.min(WIDTH, HEIGHT) / 2 - PADDING;
+
+	var data = [75, 68, 32, 95];
+	var colors = ["red", "black", "blue", "#ffcc00"];
+
+	var lastPosition = 0;
+	var total = data.reduce(function(previousValue, currentValue, index, array) {
+	  return previousValue + currentValue
+	});
+
+	for (var i = 0; i < data.length; ++i) {
+	  ctx.fillStyle = colors[i];
+	  ctx.beginPath();
+	  ctx.moveTo(center[0], center[1]);
+	  ctx.arc(center[0], center[1], R, lastPosition,
+	          lastPosition + (Math.PI * 2 * (data[i] / total)), false);
+	  ctx.lineTo(center[0], center[1]);
+	  ctx.fill();
+	  lastPosition += Math.PI * 2 * (data[i] / total);
+	}
+	
+	ctx.translate(center[0], center[1]);
+  //ctx.rotate(rotation / time);
+  ctx.rotate(0.05);
+  ctx.translate(-center[0], -center[1]);
+  //rotation++;
+
+  window.requestAnimationFrame(draw);
+}
+
+window.requestAnimationFrame(draw);
+
+var container = document.querySelector('#canvas-container');
+container.insertBefore(canvas, container.firstElementChild);
+</script>
+
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+<script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+
+		<style type="text/css">
+#wrapper {
+	text-align: center;
+}
+#wrapperlogo {
+	text-align: left;
+	padding-left: 300px;
+}
+#wrapper > div {
+	display: inline-block;
+	margin: 0 20px;
+	padding: 10px;
+	background-color: #eee;
+	border-radius: 10px;
+	font-weight: 600;
+}
+#container {
+  width: 300px;
+  height: 300px;
+  /*https://www.webkit.org/blog/176/css-canvas-drawing/*/
+  background: -webkit-canvas(animation) no-repeat 50% 50%;
+  background-size: 100%;
+  display: inline-block;
+  -webkit-transition: background 0.4s;
+}
+#notsupport {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  padding: 10px;
+  border: 1px solid red;
+  background-color: rgba(255,0,0,0.1);
+  border-radius: 5px;
+  display: none;
+  position: relative;
+  z-index: 1000;
+}
+</style>
+
+<!-- # BEGIN CONTENTS # -->
+<div itemscope itemtype="http://schema.org/AudioObject" 
+data-toggle="tooltip" 
+data-placement="top" 
+title="Listening Hardwell via Soundcloud">
+<meta itemprop="duration" content="Hardwell" />
+<meta itemprop="encodingFormat" content="swf" />
+<meta itemprop="contentUrl" content="http://player.soundcloud.com/player.swf?url=https://api.soundcloud.com/playlists/40635433&amp;" />
+<span itemprop="name"><b>Hardwell</b> </span><span itemprop="description">via soundcloud</span>
+</div>
+<iframe id="sc-widget" class="soundcloud" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/playlists/40635433"></iframe>
+<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+<script type="text/javascript">
+  (function(){
+    var widgetIframe = document.getElementById('sc-widget'),
+        widget       = SC.Widget(widgetIframe);
+
+    widget.bind(SC.Widget.Events.READY, function() {
+      widget.bind(SC.Widget.Events.PLAY, function() {
+        // get information about currently playing sound
+        widget.getCurrentSound(function(currentSound) {
+          console.log('sound ' + currentSound.get('') + 'began to play');
+        });
+      });
+      // get current level of volume
+      widget.getVolume(function(volume) {
+        console.log('current volume value is ' + volume);
+      });
+      // set new volume level
+      widget.setVolume(50);
+      // get the value of the current position
+    });
+
+
+function(finish) {
+    var audio = this.audio;
+
+    audio.addEventListener('loadedmetadata', function() {
+      setTimeout(function() {
+        audio.addEventListener('progress', function() {
+          finish(false); // Still loading data - FAIL
+        }, false);
+
+        setTimeout(function() {
+          finish(true); // Stoped loading data - WIN
+        }, 1000);
+      }, 1000); // Wait 1 sec
+    }, false);
+
+    audio.preload = 'metadata';
+    audio.src = AWPY.sound.short.stream_url();
+  }
+  }());
+</script>
+<script>
+var url = 'https://api.soundcloud.com/tracks.json?client_id=a08cbbada381c2ca56b1d5a9f9e049cd';
+$.getJSON(url, function(tracks) {
+  $(tracks).each(function(track) {
+    console.log(track.title);
+  }
+});
+</script>
+  
+		<script type="text/javascript"> 
+    var adfly_id = 7923888; 
+</script> 
+<script src="https://cdn.adf.ly/js/display.js"></script> 
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-60582737-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
